@@ -36,11 +36,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    api project(':network')
     api project(':common')
     api libraries.kotlinStdLib
 
     api networkLibraries.moshi
     api networkLibraries.retrofit
+
+    api diLibraries.koin
 
     kapt compilers.moshi
 }

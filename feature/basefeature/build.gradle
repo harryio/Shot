@@ -36,6 +36,8 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     api project(':common')
+
     api libraries.kotlinStdLib
     api androidLibraries
+    api diLibraries.koinAndroid
 }

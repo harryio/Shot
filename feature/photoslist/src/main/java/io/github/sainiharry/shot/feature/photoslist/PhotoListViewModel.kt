@@ -23,7 +23,8 @@ internal class PhotoListViewModel(
 
     fun loadData() {
         viewModelScope.launch(dispatcher) {
-            _photoList.value = photoRepository.fetchPhotos(ImageSource.UNSPLASH)
+            val fetchPhotos = photoRepository.fetchPhotos(ImageSource.UNSPLASH)
+            _photoList.value = fetchPhotos
         }
     }
 
