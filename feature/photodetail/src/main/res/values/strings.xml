@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="photographer">Photographer</string>
+    <string name="date">Date</string>
+    <string name="location">Location</string>
+    <string name="likes">Likes</string>
+</resources>
