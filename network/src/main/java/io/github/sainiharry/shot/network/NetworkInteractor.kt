@@ -1,17 +1,11 @@
 package io.github.sainiharry.shot.network
 
 import com.squareup.moshi.Moshi
+import io.github.sainiharry.shot.common.ImageSource
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-
-internal const val BASE_UNSPLASH_API_URL = "https://api.unsplash.com/"
-
-enum class ImageSource constructor(internal val apiUrl: String) {
-
-    UNSPLASH(BASE_UNSPLASH_API_URL)
-}
 
 internal class NetworkInteractor internal constructor(private val unsplashClientId: String) {
 
