@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/photos_list_nav"
+    app:startDestination="@id/photoListFragment">
+
+    <fragment
+        android:id="@+id/photoListFragment"
+        android:name="io.github.sainiharry.shot.feature.photoslist.PhotoListFragment"
+        android:label="PhotoListFragment">
+        <action
+            android:id="@+id/action_photo_details"
+            app:destination="@id/photoDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/photoDetailsFragment"
+        android:name="io.github.sainiharry.shot.feature.photodetail.PhotoDetailsFragment">
+
+        <argument
+            android:name="photoId"
+            app:argType="string" />
+
+        <argument
+            android:name="photoTitle"
+            app:argType="string" />
+
+        <argument
+            android:name="photoUrl"
+            app:argType="string" />
+
+    </fragment>
+
+</navigation>

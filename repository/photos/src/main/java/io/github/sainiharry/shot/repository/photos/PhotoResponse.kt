@@ -7,6 +7,7 @@ import io.github.sainiharry.shot.common.Photo
 @JsonClass(generateAdapter = true)
 internal data class UnsplashPhotoResponse(
     val id: String?,
+    val description: String?,
     @Json(name = "urls") val photos: UnsplashPhoto?
 )
 
@@ -23,5 +24,5 @@ internal fun UnsplashPhotoResponse.toPhoto(): Photo? = when {
     id == null -> null
     photos == null -> null
     photos.regular == null -> null
-    else -> Photo(id, photos.regular)
+    else -> Photo(id, description ?: "", photos.regular)
 }

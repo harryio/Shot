@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 30
@@ -23,6 +25,10 @@ android {
         }
     }
 
+    buildFeatures {
+        dataBinding true
+    }
+
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
@@ -37,8 +43,11 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':feature:basefeature')
     implementation project(':repository:photos')
+    implementation project(':feature:photodetail')
 
     implementation libraries.glide
+
+    implementation navigation
 
     testImplementation testLibraries
     androidTestImplementation androidTestLibraries

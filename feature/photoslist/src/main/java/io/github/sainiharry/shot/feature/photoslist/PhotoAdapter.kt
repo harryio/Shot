@@ -48,6 +48,7 @@ internal class PhotosViewHolder(
     }
 
     fun onBind(photo: Photo) {
+        this.photo = photo
         Glide.with(itemView.context)
             .load(photo.url)
             .into(photosImageView)

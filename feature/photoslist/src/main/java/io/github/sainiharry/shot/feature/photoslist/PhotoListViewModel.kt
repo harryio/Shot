@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import io.github.sainiharry.shot.common.ImageSource
 import io.github.sainiharry.shot.common.ItemClickListener
 import io.github.sainiharry.shot.common.Photo
+import io.github.sainiharry.shot.feature.basefeature.Event
 import io.github.sainiharry.shot.repository.photos.PhotoRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -21,6 +22,10 @@ internal class PhotoListViewModel(
     val photoList: LiveData<List<Photo>>
         get() = _photoList
 
+    private val _photoDetailNavigationEvent = MutableLiveData<Event<Photo>>()
+    val photoDetailsNavigationEvent: LiveData<Event<Photo>>
+        get() = _photoDetailNavigationEvent
+
     fun loadData() {
         viewModelScope.launch(dispatcher) {
             val fetchPhotos = photoRepository.fetchPhotos(ImageSource.UNSPLASH)
@@ -29,6 +34,6 @@ internal class PhotoListViewModel(
     }
 
     override fun onItemClick(obj: Photo) {
-        TODO("Not yet implemented")
+        _photoDetailNavigationEvent.value = Event(obj)
     }
 }

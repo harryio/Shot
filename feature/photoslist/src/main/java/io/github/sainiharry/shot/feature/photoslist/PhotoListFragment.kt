@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import io.github.sainiharry.shot.feature.basefeature.EventObserver
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.android.get
@@ -42,6 +44,7 @@ class PhotoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = findNavController()
 
         if (!this::adapter.isInitialized) {
             adapter = PhotoAdapter(model)
@@ -54,5 +57,15 @@ class PhotoListFragment : Fragment() {
         model.photoList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
+
+        model.photoDetailsNavigationEvent.observe(viewLifecycleOwner, EventObserver {
+            navController.navigate(
+                PhotoListFragmentDirections.actionPhotoDetails(
+                    it.id,
+                    it.title,
+                    it.url
+                )
+            )
+        })
     }
 }
