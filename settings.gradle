@@ -1,3 +1,5 @@
+include ':repository:photos'
+include ':repository:baserepository'
 include ':network'
 include ':app'
 rootProject.name = "Shot"
