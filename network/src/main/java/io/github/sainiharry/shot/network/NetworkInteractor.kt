@@ -1,6 +1,7 @@
 package io.github.sainiharry.shot.network
 
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import io.github.sainiharry.shot.common.ImageSource
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -8,6 +9,8 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.*
+import kotlin.collections.HashMap
 
 const val UNSPLASH_API_KEY_QUALIFIER = "unsplash_api_key"
 
@@ -22,7 +25,9 @@ class NetworkInteractor internal constructor(private val unsplashClientId: Strin
     private val retrofitMap = HashMap<ImageSource, Retrofit>()
 
     private val moshi by lazy {
-        Moshi.Builder().build()
+        Moshi.Builder()
+            .add(Date::class.java, Rfc3339DateJsonAdapter())
+            .build()
     }
 
     private val okHttpClient by lazy {

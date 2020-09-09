@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="photo"
-            type="io.github.sainiharry.shot.common.Photo" />
+            name="model"
+            type="io.github.sainiharry.shot.feature.photodetail.PhotoDetailsViewModel" />
     </data>
 
     <ScrollView
@@ -97,6 +97,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:text="@{model.photographer}"
                     app:layout_constraintBaseline_toBaselineOf="@id/photographer_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/label_barrier"
@@ -107,6 +108,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:text="@{model.date}"
                     app:layout_constraintBaseline_toBaselineOf="@id/date_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/label_barrier"
@@ -117,6 +119,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:text="@{model.location}"
                     app:layout_constraintBaseline_toBaselineOf="@id/location_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/label_barrier"
@@ -127,6 +130,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:text="@{model.likes}"
                     app:layout_constraintBaseline_toBaselineOf="@id/likes_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/label_barrier"

@@ -53,6 +53,7 @@ ext {
 
     networkLibraries = [
             moshi                 : "com.squareup.moshi:moshi:$moshiVersion",
+            moshiAdapters         : "com.squareup.moshi:moshi-adapters:$moshiVersion",
             retrofit              : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             retrofitMoshiConverter: "com.squareup.retrofit2:converter-moshi:$retrofitVersion",
             networkLogging        : "com.squareup.okhttp3:logging-interceptor:$loggingLibVersion"

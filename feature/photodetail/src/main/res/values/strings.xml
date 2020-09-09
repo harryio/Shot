@@ -4,4 +4,6 @@
     <string name="date">Date</string>
     <string name="location">Location</string>
     <string name="likes">Likes</string>
+
+    <string name="photo_details">Photo Details</string>
 </resources>

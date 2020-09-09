@@ -62,7 +62,7 @@ class PhotoListFragment : Fragment() {
             navController.navigate(
                 PhotoListFragmentDirections.actionPhotoDetails(
                     it.id,
-                    it.title,
+                    it.title ?: getString(R.string.photo_details),
                     it.url
                 )
             )

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.bumptech.glide.Glide
 import io.github.sainiharry.shot.common.Photo
 import io.github.sainiharry.shot.feature.photodetail.databinding.FragmentPhotoDetailsBinding
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +57,7 @@ class PhotoDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPhotoDetailsBinding.inflate(inflater, container, false)
-        binding.photo = photo
+        binding.model = model
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -64,6 +65,10 @@ class PhotoDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
+
+        Glide.with(this)
+            .load(photo?.url)
+            .into(binding.photoImageView)
 
         photo?.let {
             binding.toolbar.title = it.title
