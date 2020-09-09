@@ -1,3 +1,4 @@
+include ':feature:photodetail'
 include ':feature:basefeature'
 include ':feature:photoslist'
 include ':common'
