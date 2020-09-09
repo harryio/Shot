@@ -27,6 +27,9 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':feature:basefeature')
+    implementation project(':repository:photos')
+
+    implementation libraries.glide
 
     testImplementation testLibraries
     androidTestImplementation androidTestLibraries
