@@ -26,6 +26,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':feature:photoslist')
 
     implementation libraries.kotlinStdLib
     implementation androidLibraries
