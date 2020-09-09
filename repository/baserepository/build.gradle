@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    api project(':network')
     api libraries.kotlinStdLib
 
     api networkLibraries.moshi

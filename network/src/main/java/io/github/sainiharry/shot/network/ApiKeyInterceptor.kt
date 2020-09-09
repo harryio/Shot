@@ -3,9 +3,9 @@ package io.github.sainiharry.shot.network
 import okhttp3.Interceptor
 import okhttp3.Response
 
-val UNSPLASH_AUTHENTICATION_HEADER = "UnSplash-Authentication"
+const val UNSPLASH_AUTHENTICATION_HEADER = "UnSplash-Authentication"
 
-private val UNSPLASH_AUTHORIZATION_HEADER = "Authorization: Client-ID"
+private const val UNSPLASH_AUTHORIZATION_HEADER = "Authorization: Client-ID"
 
 class ApiKeyInterceptor(private val unsplashClientId: String) : Interceptor {
 
