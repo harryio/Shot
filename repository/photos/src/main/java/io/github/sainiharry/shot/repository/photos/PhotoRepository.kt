@@ -14,6 +14,8 @@ val photoRepositoryModule = module {
 
 }
 
+private const val PER_PAGE = 20
+
 interface PhotoRepository {
 
     suspend fun fetchPhotos(imageSource: ImageSource): List<Photo>
@@ -24,7 +26,7 @@ internal class PhotoRepositoryImpl(private val networkInteractor: NetworkInterac
 
 
     override suspend fun fetchPhotos(imageSource: ImageSource): List<Photo> {
-        return getService(imageSource).fetchUnSplashPhotos()
+        return getService(imageSource).fetchUnSplashPhotos(PER_PAGE)
             .mapNotNull { it.toPhoto() }
     }
 
