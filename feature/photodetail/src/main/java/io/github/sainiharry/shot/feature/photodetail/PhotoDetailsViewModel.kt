@@ -1,5 +1,6 @@
 package io.github.sainiharry.shot.feature.photodetail
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +10,8 @@ import io.github.sainiharry.shot.repository.photos.PhotoRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
-private const val DEFAULT_VAL = "--"
+@VisibleForTesting
+const val DEFAULT_VAL = "--"
 
 internal class PhotoDetailsViewModel(
     private val photoRepository: PhotoRepository,
