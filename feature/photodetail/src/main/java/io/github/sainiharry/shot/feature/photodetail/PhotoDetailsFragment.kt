@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialContainerTransform
 import io.github.sainiharry.shot.common.Photo
+import io.github.sainiharry.shot.feature.basefeature.EventObserver
 import io.github.sainiharry.shot.feature.photodetail.databinding.FragmentPhotoDetailsBinding
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.android.get
@@ -82,6 +83,11 @@ class PhotoDetailsFragment : Fragment() {
         photo?.let {
             binding.toolbar.title = it.title
         }
+
         NavigationUI.setupWithNavController(binding.toolbar, navController)
+
+        model.errorEvent.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(requireContext(), R.string.generic_error, Toast.LENGTH_SHORT).show()
+        })
     }
 }

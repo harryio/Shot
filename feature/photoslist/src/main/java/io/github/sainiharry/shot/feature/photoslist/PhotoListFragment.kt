@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -112,6 +113,10 @@ class PhotoListFragment : Fragment() {
                     )
                 )
             }
+        })
+
+        model.errorEvent.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(requireContext(), io.github.sainiharry.shot.feature.photodetail.R.string.generic_error, Toast.LENGTH_SHORT).show()
         })
     }
 }

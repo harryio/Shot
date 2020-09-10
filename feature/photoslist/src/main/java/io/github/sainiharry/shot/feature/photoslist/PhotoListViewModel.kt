@@ -26,10 +26,19 @@ internal class PhotoListViewModel(
     val photoDetailsNavigationEvent: LiveData<Event<Photo>>
         get() = _photoDetailNavigationEvent
 
+    private val _errorEvent = MutableLiveData<Event<Any?>>()
+    val errorEvent: LiveData<Event<Any?>>
+        get() = _errorEvent
+
     fun loadData() {
         viewModelScope.launch(dispatcher) {
-            val fetchPhotos = photoRepository.fetchPhotos(ImageSource.UNSPLASH)
-            _photoList.value = fetchPhotos
+            try {
+                val fetchPhotos = photoRepository.fetchPhotos(ImageSource.UNSPLASH)
+                _photoList.value = fetchPhotos
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _errorEvent.value = Event(Any())
+            }
         }
     }
 

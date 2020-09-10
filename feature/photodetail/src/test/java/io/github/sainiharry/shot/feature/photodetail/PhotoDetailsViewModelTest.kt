@@ -102,7 +102,12 @@ class PhotoDetailsViewModelTest {
 
     @Test
     fun testFetchPhotoDetailsSuccess() = runBlockingTest {
-        val photo = getMockPhoto(photographer = "photographer", date = "date", location = "location", likes = "likes")
+        val photo = getMockPhoto(
+            photographer = "photographer",
+            date = "date",
+            location = "location",
+            likes = "likes"
+        )
         `when`(photoRepository.fetchPhotoDetails(ImageSource.UNSPLASH, photo.id)).thenReturn(photo)
         model.handlePhoto(photo)
         verify(photographObserver).onChanged(photo.photographer)
