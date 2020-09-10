@@ -76,6 +76,7 @@ class PhotoListViewModelTest {
         photographer: String? = null,
         date: String? = null,
         location: String? = null,
-        likes: String? = null
-    ) = Photo(id, title, url, photographer, date, location, likes)
+        likes: String? = null,
+        height: Long? = null
+    ) = Photo(id, title, url, photographer, date, location, likes, height)
 }

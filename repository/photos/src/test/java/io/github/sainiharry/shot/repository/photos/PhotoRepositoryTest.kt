@@ -84,13 +84,15 @@ private fun getMockUnsplashPhotoResponse(
     location: UnsplashPhotoLocation? = getMockUnsplashPhotoLocation(),
     user: UnsplashUser? = getMockUnsplashUser(),
     photos: UnsplashPhoto? = getMockUnsplashPhoto(),
-    createdAt: Date? = Date()
+    createdAt: Date? = Date(),
+    height: Long? = 340
 ) = UnsplashPhotoResponse(
     id,
     description,
     likes,
     location,
     user,
+    height,
     photos,
     createdAt
 )

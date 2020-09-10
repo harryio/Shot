@@ -24,6 +24,7 @@ internal data class UnsplashPhotoResponse(
     val likes: Long?,
     val location: UnsplashPhotoLocation?,
     val user: UnsplashUser?,
+    val height: Long?,
     @Json(name = "urls") val photos: UnsplashPhoto?,
     @Json(name = "created_at") val createdAt: Date?
 )
@@ -54,6 +55,7 @@ internal fun UnsplashPhotoResponse.toPhoto(): Photo? = when {
         user?.name,
         NetworkUtils.formatDate(createdAt),
         location?.city,
-        likes?.toString()
+        likes?.toString(),
+        height
     )
 }

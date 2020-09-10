@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.github.sainiharry.shot.feature.basefeature.EventObserver
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 import kotlinx.coroutines.Dispatchers
@@ -50,8 +50,16 @@ class PhotoListFragment : Fragment() {
             adapter = PhotoAdapter(model)
         }
 
+        val spanCount = 2
         recycler_view.setHasFixedSize(true)
-        recycler_view.layoutManager = GridLayoutManager(requireContext(), 2)
+        recycler_view.layoutManager =
+            StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
+        recycler_view.addItemDecoration(
+            GridSpacingItemDecoration(
+                spanCount,
+                requireContext().resources.getDimensionPixelSize(R.dimen.spacing_s)
+            )
+        )
         recycler_view.adapter = this@PhotoListFragment.adapter
 
         model.photoList.observe(viewLifecycleOwner) {

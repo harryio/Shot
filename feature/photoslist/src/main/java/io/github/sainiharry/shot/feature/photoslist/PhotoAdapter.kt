@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.github.sainiharry.shot.common.ItemClickListener
 import io.github.sainiharry.shot.common.Photo
+import kotlinx.android.synthetic.main.item_photo.view.*
 
 internal val listDiffer = object : DiffUtil.ItemCallback<Photo>() {
 
@@ -39,6 +40,11 @@ internal class PhotosViewHolder(
 
     private var photo: Photo? = null
 
+    private val density = itemView.context.resources.displayMetrics.density
+
+    private val defaultItemHeight =
+        itemView.context.resources.getDimensionPixelSize(R.dimen.item_photo_height)
+
     init {
         itemView.setOnClickListener {
             photo?.let {
@@ -49,8 +55,12 @@ internal class PhotosViewHolder(
 
     fun onBind(photo: Photo) {
         this.photo = photo
+        itemView.photo.layoutParams.height = photo.height?.let {
+            (it / 10).toInt()
+        } ?: defaultItemHeight
         Glide.with(itemView.context)
             .load(photo.url)
+            .centerCrop()
             .into(photosImageView)
     }
 }

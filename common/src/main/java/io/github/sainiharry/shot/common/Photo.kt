@@ -7,7 +7,8 @@ data class Photo(
     val photographer: String?,
     val date: String?,
     val location: String?,
-    val likes: String?
+    val likes: String?,
+    val height: Long?
 ) {
-    constructor(id: String, title: String, url: String) : this(id, title, url, null, null, null, null)
+    constructor(id: String, title: String, url: String) : this(id, title, url, null, null, null, null, null)
 }
