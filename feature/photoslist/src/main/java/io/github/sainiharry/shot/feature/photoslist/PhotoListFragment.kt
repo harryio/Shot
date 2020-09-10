@@ -4,12 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialElevationScale
 import io.github.sainiharry.shot.feature.basefeature.EventObserver
 import kotlinx.android.synthetic.main.fragment_photo_list.*
 import kotlinx.coroutines.Dispatchers
@@ -28,8 +34,12 @@ class PhotoListFragment : Fragment() {
 
     private lateinit var adapter: PhotoAdapter
 
+    private var clickedItemView: View? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        exitTransition = MaterialElevationScale(false)
+        reenterTransition = MaterialElevationScale(true)
 
         model.loadData()
     }
@@ -39,6 +49,7 @@ class PhotoListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        postponeEnterTransition()
         return inflater.inflate(R.layout.fragment_photo_list, container, false)
     }
 
@@ -47,7 +58,9 @@ class PhotoListFragment : Fragment() {
         val navController = findNavController()
 
         if (!this::adapter.isInitialized) {
-            adapter = PhotoAdapter(model)
+            adapter = PhotoAdapter(model) {
+                clickedItemView = it
+            }
         }
 
         val spanCount = 2
@@ -62,18 +75,43 @@ class PhotoListFragment : Fragment() {
         )
         recycler_view.adapter = this@PhotoListFragment.adapter
 
+        view.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                startPostponedEnterTransition()
+                view.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            }
+        })
+
         model.photoList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
-        model.photoDetailsNavigationEvent.observe(viewLifecycleOwner, EventObserver {
-            navController.navigate(
-                PhotoListFragmentDirections.actionPhotoDetails(
-                    it.id,
-                    it.title ?: getString(R.string.photo_details),
-                    it.url
+        model.photoDetailsNavigationEvent.observe(viewLifecycleOwner, EventObserver { photo ->
+            val extras: FragmentNavigator.Extras? = if (clickedItemView != null) {
+                val transitionName = ViewCompat.getTransitionName(clickedItemView!!) ?: ""
+                FragmentNavigatorExtras(clickedItemView!! to transitionName)
+            } else {
+                null
+            }
+
+            if (extras != null) {
+                navController.navigate(
+                    PhotoListFragmentDirections.actionPhotoDetails(
+                        photo.id,
+                        photo.title ?: getString(R.string.photo_details),
+                        photo.url
+                    ), extras
                 )
-            )
+            } else {
+                navController.navigate(
+                    PhotoListFragmentDirections.actionPhotoDetails(
+                        photo.id,
+                        photo.title ?: getString(R.string.photo_details),
+                        photo.url
+                    )
+                )
+            }
         })
     }
 }

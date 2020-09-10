@@ -1,10 +1,12 @@
 package io.github.sainiharry.shot.feature.photodetail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -12,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
+import com.google.android.material.transition.MaterialContainerTransform
 import io.github.sainiharry.shot.common.Photo
 import io.github.sainiharry.shot.feature.photodetail.databinding.FragmentPhotoDetailsBinding
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +37,11 @@ class PhotoDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            fadeMode = MaterialContainerTransform.FADE_MODE_OUT
+            containerColor = Color.WHITE
+        }
 
         photo = arguments?.let {
             val id = it.getString("photoId")
@@ -64,9 +72,10 @@ class PhotoDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ViewCompat.setTransitionName(binding.rootView, photo?.id ?: "")
         val navController = findNavController()
 
-        Glide.with(this)
+        Glide.with(requireActivity())
             .load(photo?.url)
             .into(binding.photoImageView)
 

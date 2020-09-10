@@ -6,8 +6,7 @@
 
     <fragment
         android:id="@+id/photoListFragment"
-        android:name="io.github.sainiharry.shot.feature.photoslist.PhotoListFragment"
-        android:label="PhotoListFragment">
+        android:name="io.github.sainiharry.shot.feature.photoslist.PhotoListFragment">
         <action
             android:id="@+id/action_photo_details"
             app:destination="@id/photoDetailsFragment" />
