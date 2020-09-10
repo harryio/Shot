@@ -30,4 +30,6 @@ dependencies {
     implementation project(':repository:baserepository')
 
     kapt compilers.moshi
+
+    testImplementation testLibraries
 }
